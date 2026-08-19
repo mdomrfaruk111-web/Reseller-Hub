@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import { CartProvider, useCart } from './context/CartContext';
+import { AuthProvider, useAuth } from './AuthContext';
+import { CartProvider, useCart } from './CartContext';
 import { Product, StoreSettings, Order } from './types';
 import { fetchProducts, fetchStoreSettings } from './services/storeService';
 import { DEFAULT_STORE_SETTINGS, SUPER_ADMIN_EMAIL } from './data/initialData';
@@ -20,23 +20,23 @@ import {
 } from 'lucide-react';
 
 // Layout & Pages
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { ProductCatalog } from './components/ProductCatalog';
-import { ResellerPortal } from './components/ResellerPortal';
-import { CustomerSupport } from './components/CustomerSupport';
-import { ResellerSupport } from './components/ResellerSupport';
-import { ContactPage } from './components/ContactPage';
-import { AdminDashboard } from './components/admin/AdminDashboard';
-import { AdminLoginPage } from './components/admin/AdminLoginPage';
+import { Header } from './Header';
+import { Footer } from './Footer';
+import { ProductCatalog } from './ProductCatalog';
+import { ResellerPortal } from './ResellerPortal';
+import { CustomerSupport } from './CustomerSupport';
+import { ResellerSupport } from './ResellerSupport';
+import { ContactPage } from './ContactPage';
+import { AdminDashboard } from './admin/AdminDashboard';
+import { AdminLoginPage } from './admin/AdminLoginPage';
 
 // Modals
-import { ProductDetailModal } from './components/ProductDetailModal';
-import { CartDrawer } from './components/CartDrawer';
-import { CheckoutModal } from './components/CheckoutModal';
-import { OrderSuccessModal } from './components/OrderSuccessModal';
-import { OrderTrackingModal } from './components/OrderTrackingModal';
-import { AuthModal } from './components/AuthModal';
+import { ProductDetailModal } from './ProductDetailModal';
+import { CartDrawer } from './CartDrawer';
+import { CheckoutModal } from './CheckoutModal';
+import { OrderSuccessModal } from './OrderSuccessModal';
+import { OrderTrackingModal } from './OrderTrackingModal';
+import { AuthModal } from './AuthModal';
 
 function MainAppContent() {
   const { currentUser, isAdmin, isReseller } = useAuth();
