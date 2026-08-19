@@ -20,7 +20,7 @@ import {
 } from 'firebase/firestore';
 import { auth, db, handleFirestoreError, OperationType } from './firebase';
 import { UserProfile, UserRole } from '../types';
-import { BUSINESS_INFO, SUPER_ADMIN_EMAIL, ADMIN_ACCESS_PASSWORD } from '../data/initialData';
+import { BUSINESS_INFO, SUPER_ADMIN_EMAIL, ADMIN_ACCESS_PASSWORD } from './initialData';
 
 interface AuthContextType {
   currentUser: FirebaseUser | null;
