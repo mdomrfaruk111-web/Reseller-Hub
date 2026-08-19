@@ -1,0 +1,290 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role-based attributes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "role": { "type": "string", "enum": ["admin", "reseller", "customer"] },
+        "status": { "type": "string", "enum": ["active", "suspended", "pending"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "email", "role", "status", "createdAt"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Trusted administrator record for role verification",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["super_admin", "admin"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Store product catalog item with wholesale and retail pricing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "category": { "type": "string", "maxLength": 100 },
+        "price": { "type": "number" },
+        "resellerPrice": { "type": "number" },
+        "stock": { "type": "number" },
+        "sku": { "type": "string", "maxLength": 50 },
+        "images": { "type": "array" },
+        "status": { "type": "string", "enum": ["active", "draft", "archived"] },
+        "featured": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "category", "price", "resellerPrice", "stock", "status"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer and reseller placed order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string", "maxLength": 100 },
+        "customerEmail": { "type": "string" },
+        "customerPhone": { "type": "string", "maxLength": 30 },
+        "shippingAddress": { "type": "string", "maxLength": 500 },
+        "items": { "type": "array" },
+        "subtotal": { "type": "number" },
+        "shippingFee": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string", "enum": ["unpaid", "paid", "refunded"] },
+        "orderStatus": { "type": "string", "enum": ["pending", "processing", "shipped", "delivered", "cancelled"] },
+        "resellerId": { "type": "string" },
+        "resellerCommission": { "type": "number" },
+        "trackingNumber": { "type": "string", "maxLength": 100 },
+        "notes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "customerName", "customerPhone", "shippingAddress", "totalAmount", "paymentStatus", "orderStatus", "createdAt"]
+    },
+    "Reseller": {
+      "title": "Reseller",
+      "description": "Reseller partner profile and metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "businessName": { "type": "string", "maxLength": 150 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "active", "suspended"] },
+        "commissionRate": { "type": "number" },
+        "totalEarnings": { "type": "number" },
+        "pendingEarnings": { "type": "number" },
+        "paidEarnings": { "type": "number" },
+        "bankDetails": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "businessName", "phone", "email", "status", "commissionRate", "createdAt"]
+    },
+    "Wallet": {
+      "title": "Wallet",
+      "description": "Reseller balance and payout tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "balance": { "type": "number" },
+        "pendingBalance": { "type": "number" },
+        "totalWithdrawn": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "balance", "pendingBalance", "totalWithdrawn"]
+    },
+    "Withdrawal": {
+      "title": "Withdrawal",
+      "description": "Reseller fund payout request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "resellerName": { "type": "string", "maxLength": 150 },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["bKash", "Nagad", "Rocket", "Bank"] },
+        "accountDetails": { "type": "string", "maxLength": 200 },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "transactionId": { "type": "string", "maxLength": 100 },
+        "adminNotes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "amount", "paymentMethod", "accountDetails", "status", "createdAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Administrative actions audit log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "adminId": { "type": "string" },
+        "adminEmail": { "type": "string" },
+        "action": { "type": "string", "maxLength": 150 },
+        "targetType": { "type": "string", "maxLength": 100 },
+        "targetId": { "type": "string", "maxLength": 100 },
+        "details": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "adminEmail", "action", "createdAt"]
+    },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "Customer and reseller support messages",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string", "maxLength": 100 },
+        "userEmail": { "type": "string" },
+        "userPhone": { "type": "string", "maxLength": 30 },
+        "userType": { "type": "string", "enum": ["customer", "reseller", "guest"] },
+        "subject": { "type": "string", "maxLength": 200 },
+        "message": { "type": "string", "maxLength": 3000 },
+        "status": { "type": "string", "enum": ["open", "in_progress", "resolved"] },
+        "reply": { "type": "string", "maxLength": 3000 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userName", "userEmail", "subject", "message", "status", "createdAt"]
+    },
+    "Setting": {
+      "title": "Setting",
+      "description": "Store configuration and business info",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "storeName": { "type": "string", "maxLength": 150 },
+        "contactPhone": { "type": "string", "maxLength": 50 },
+        "contactEmail": { "type": "string", "maxLength": 100 },
+        "currency": { "type": "string", "maxLength": 10 },
+        "currencySymbol": { "type": "string", "maxLength": 10 },
+        "announcementBanner": { "type": "string", "maxLength": 300 },
+        "deliveryFeeInside": { "type": "number" },
+        "deliveryFeeOutside": { "type": "number" },
+        "defaultCommissionRate": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "storeName", "contactPhone", "contactEmail"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Product category management item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "icon": { "type": "string", "maxLength": 50 },
+        "image": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "hidden"] },
+        "displayOrder": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "status", "createdAt"]
+    },
+    "ReferralNode": {
+      "title": "ReferralNode",
+      "description": "5-generation reseller referral hierarchy",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "resellerId": { "type": "string" },
+        "sponsorId": { "type": "string" },
+        "generationLevel": { "type": "number" },
+        "teamCount": { "type": "number" },
+        "teamSalesVolume": { "type": "number" },
+        "referralCode": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "resellerId", "referralCode", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System broadcast and customer/reseller alerts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "maxLength": 150 },
+        "message": { "type": "string", "maxLength": 1000 },
+        "targetType": { "type": "string", "enum": ["all", "resellers", "customers"] },
+        "priority": { "type": "string", "enum": ["low", "normal", "high", "urgent"] },
+        "status": { "type": "string", "enum": ["active", "archived"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "message", "targetType", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Product category management collection"
+    },
+    "/referrals/{referralId}": {
+      "schema": { "$ref": "#/entities/ReferralNode" },
+      "description": "5-generation referral tree and commission tracking"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/Notification" },
+      "description": "System and marketing notifications"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile records"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Trusted admin identifier records"
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Catalog of products available for retail and wholesale"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Purchases and orders"
+    },
+    "/resellers/{resellerId}": {
+      "schema": { "$ref": "#/entities/Reseller" },
+      "description": "Reseller partner information"
+    },
+    "/wallets/{walletId}": {
+      "schema": { "$ref": "#/entities/Wallet" },
+      "description": "Reseller financial wallet balances"
+    },
+    "/withdrawals/{withdrawalId}": {
+      "schema": { "$ref": "#/entities/Withdrawal" },
+      "description": "Reseller withdrawal requests"
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Logs of administrative operations"
+    },
+    "/support_tickets/{ticketId}": {
+      "schema": { "$ref": "#/entities/SupportTicket" },
+      "description": "Customer and reseller support messages"
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/Setting" },
+      "description": "Global store and system settings"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "E-Commerce & Reseller Platform",
+  "description": "Comprehensive E-Commerce and Reseller platform with role-based administration, product management, order processing, commission tracking, and wallet management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
