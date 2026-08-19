@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './AuthContext';
 import { CartProvider, useCart } from './CartContext';
 import { Product, StoreSettings, Order } from './types';
-import { fetchProducts, fetchStoreSettings } from './services/storeService';
-import { DEFAULT_STORE_SETTINGS, SUPER_ADMIN_EMAIL } from './data/initialData';
+import { fetchProducts, fetchStoreSettings } from './storeService';
+import { DEFAULT_STORE_SETTINGS, SUPER_ADMIN_EMAIL } from './initialData';
 import {
   ShoppingBag,
   ShieldCheck,
@@ -27,8 +27,8 @@ import { ResellerPortal } from './ResellerPortal';
 import { CustomerSupport } from './CustomerSupport';
 import { ResellerSupport } from './ResellerSupport';
 import { ContactPage } from './ContactPage';
-import { AdminDashboard } from './admin/AdminDashboard';
-import { AdminLoginPage } from './admin/AdminLoginPage';
+import { AdminDashboard } from './AdminDashboard';
+import { AdminLoginPage } from './AdminLoginPage';
 
 // Modals
 import { ProductDetailModal } from './ProductDetailModal';
