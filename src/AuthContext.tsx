@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
 import { User } from './types';
-import { auth, db } from './firebase';
 import { DEFAULT_STORE_SETTINGS, SUPER_ADMIN_EMAIL } from './initialData';
 
 interface AuthContextType {
